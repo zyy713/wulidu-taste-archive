@@ -25,45 +25,48 @@ const dishes = [
   },
 ];
 
-function IngredientCards() {
+function IngredientCards({ count = ingredients.length }: { count?: number }) {
+  const visibleIngredients = ingredients.slice(0, count);
   return (
-    <div className="ingredient-cards" aria-label="三张食材卡">
-      {ingredients.map((name) => (
+    <div className="ingredient-cards" aria-label={`${visibleIngredients.length}张食材卡`}>
+      {visibleIngredients.map((name) => (
         <div className="ingredient-card" key={name}>{name}</div>
       ))}
     </div>
   );
 }
 
-function Basket() {
+function Basket({ count }: { count: number }) {
   return (
-    <div className="object-wrap" aria-label="装有食材卡的菜篮子">
+    <div className="object-wrap" aria-label="菜篮子">
       <div className="basket-handle" />
       <div className="basket-body">
-        <IngredientCards />
+        <IngredientCards count={count} />
       </div>
     </div>
   );
 }
 
-function Pot() {
+function Pot({ count }: { count: number }) {
   return (
-    <div className="object-wrap" aria-label="装有食材卡的锅">
+    <div className="object-wrap" aria-label="锅">
       <div className="pot-lid"><span /></div>
       <div className="pot-handle pot-handle-left" />
       <div className="pot-handle pot-handle-right" />
       <div className="pot-body">
-        <IngredientCards />
+        <IngredientCards count={count} />
       </div>
     </div>
   );
 }
 
-function DetailCards() {
+function DetailCards({ count }: { count: number }) {
   return (
     <div className="detail-row">
-      {ingredients.map((name) => (
-        <div className="detail-card" key={name}>{name}详情</div>
+      {ingredients.map((name, index) => (
+        <div className="detail-card" key={name}>
+          {index < count ? `${name}详情` : "待获取"}
+        </div>
       ))}
     </div>
   );
@@ -114,10 +117,22 @@ export default function Home() {
   const [flow, setFlow] = useState<Flow | null>(null);
   const [stage, setStage] = useState<Stage>("start");
   const [dishIndex, setDishIndex] = useState(0);
+  const [, setPressCount] = useState(0);
+  const [discoveredCount, setDiscoveredCount] = useState(0);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (stage === "cards" && event.key === "1") setStage("dish");
+      if (event.repeat) return;
+      if (stage === "cards" && event.key === "1") {
+        setPressCount((currentPressCount) => {
+          const nextPressCount = currentPressCount + 1;
+          if (nextPressCount % 10 === 0) {
+            setDiscoveredCount((currentCount) => Math.min(currentCount + 1, ingredients.length));
+          }
+          return nextPressCount;
+        });
+      }
+      if (stage === "cards" && event.key === "3") setStage("dish");
       if (stage === "dish" && event.key === "2") setStage("print");
     };
     window.addEventListener("keydown", onKeyDown);
@@ -126,6 +141,8 @@ export default function Home() {
 
   const chooseFlow = (nextFlow: Flow) => {
     setFlow(nextFlow);
+    setPressCount(0);
+    setDiscoveredCount(0);
     setStage("cards");
   };
 
@@ -140,19 +157,22 @@ export default function Home() {
 
   if (stage === "cards") {
     const notBought = flow === "not-bought";
+    const discoveredIngredients = ingredients.slice(0, discoveredCount).join("、");
     return (
       <main className="page cards-page">
         <section className="cards-main">
-          <div className="object-column">{notBought ? <Basket /> : <Pot />}</div>
+          <div className="object-column">
+            {notBought ? <Basket count={discoveredCount} /> : <Pot count={discoveredCount} />}
+          </div>
           <div className="cards-title">
             {notBought ? (
-              <h1>开始探索<br />酸木瓜、小米辣、香菜</h1>
+              <h1>开始探索{discoveredIngredients && <><br />{discoveredIngredients}</>}</h1>
             ) : (
-              <h1>今天怎么吃<br />酸木瓜、小米辣、香菜</h1>
+              <h1>今天怎么吃{discoveredIngredients && <><br />{discoveredIngredients}</>}</h1>
             )}
           </div>
         </section>
-        <DetailCards />
+        <DetailCards count={discoveredCount} />
       </main>
     );
   }

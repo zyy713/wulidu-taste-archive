@@ -21,34 +21,37 @@ const dishes = [
 let flow = null;
 let stage = "start";
 let dishIndex = 0;
+let pressCount = 0;
+let discoveredCount = 0;
 
 const app = document.getElementById("app");
 
-function ingredientCards() {
-  return `<div class="ingredient-cards" aria-label="三张食材卡">${ingredients
+function ingredientCards(count = ingredients.length) {
+  return `<div class="ingredient-cards" aria-label="${count}张食材卡">${ingredients
+    .slice(0, count)
     .map((name) => `<div class="ingredient-card">${name}</div>`)
     .join("")}</div>`;
 }
 
-function basket() {
-  return `<div class="object-wrap" aria-label="装有食材卡的菜篮子">
+function basket(count) {
+  return `<div class="object-wrap" aria-label="菜篮子">
     <div class="basket-handle"></div>
-    <div class="basket-body">${ingredientCards()}</div>
+    <div class="basket-body">${ingredientCards(count)}</div>
   </div>`;
 }
 
-function pot() {
-  return `<div class="object-wrap" aria-label="装有食材卡的锅">
+function pot(count) {
+  return `<div class="object-wrap" aria-label="锅">
     <div class="pot-lid"><span></span></div>
     <div class="pot-handle pot-handle-left"></div>
     <div class="pot-handle pot-handle-right"></div>
-    <div class="pot-body">${ingredientCards()}</div>
+    <div class="pot-body">${ingredientCards(count)}</div>
   </div>`;
 }
 
-function detailCards() {
+function detailCards(count) {
   return `<div class="detail-row">${ingredients
-    .map((name) => `<div class="detail-card">${name}详情</div>`)
+    .map((name, index) => `<div class="detail-card">${index < count ? `${name}详情` : "待获取"}</div>`)
     .join("")}</div>`;
 }
 
@@ -88,6 +91,8 @@ function renderStart() {
   document.querySelectorAll("[data-flow]").forEach((button) => {
     button.addEventListener("click", () => {
       flow = button.dataset.flow;
+      pressCount = 0;
+      discoveredCount = 0;
       stage = "cards";
       render();
     });
@@ -96,14 +101,15 @@ function renderStart() {
 
 function renderCards() {
   const notBought = flow === "not-bought";
+  const discoveredIngredients = ingredients.slice(0, discoveredCount).join("、");
   app.innerHTML = `<main class="page cards-page">
     <section class="cards-main">
-      <div class="object-column">${notBought ? basket() : pot()}</div>
+      <div class="object-column">${notBought ? basket(discoveredCount) : pot(discoveredCount)}</div>
       <div class="cards-title">
-        <h1>${notBought ? "开始探索" : "今天怎么吃"}<br />酸木瓜、小米辣、香菜</h1>
+        <h1>${notBought ? "开始探索" : "今天怎么吃"}${discoveredIngredients ? `<br />${discoveredIngredients}` : ""}</h1>
       </div>
     </section>
-    ${detailCards()}
+    ${detailCards(discoveredCount)}
   </main>`;
 }
 
@@ -149,7 +155,14 @@ function render() {
 }
 
 window.addEventListener("keydown", (event) => {
+  if (event.repeat) return;
   if (stage === "cards" && event.key === "1") {
+    pressCount += 1;
+    if (pressCount % 10 === 0) {
+      discoveredCount = Math.min(discoveredCount + 1, ingredients.length);
+      render();
+    }
+  } else if (stage === "cards" && event.key === "3") {
     stage = "dish";
     render();
   } else if (stage === "dish" && event.key === "2") {
