@@ -132,9 +132,9 @@ function renderDish() {
 function renderPrint() {
   const notBought = flow === "not-bought";
   app.innerHTML = `<main class="page print-page">
-    <section class="print-visual">${notBought ? handWithBag() : handWithBook()}</section>
+    <section class="print-visual">${notBought ? handWithBook() : handWithBag()}</section>
     <section class="print-copy">
-      <h1>${notBought ? "拿走，开做" : "记下了"}</h1>
+      <h1>${notBought ? "记下了" : "拿走，开做"}</h1>
       <button id="print-button">打印</button>
     </section>
   </main>`;

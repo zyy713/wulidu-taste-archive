@@ -189,10 +189,10 @@ export default function Home() {
   return (
     <main className="page print-page">
       <section className="print-visual">
-        {flow === "not-bought" ? <HandWithBag /> : <HandWithBook />}
+        {flow === "not-bought" ? <HandWithBook /> : <HandWithBag />}
       </section>
       <section className="print-copy">
-        <h1>{flow === "not-bought" ? "拿走，开做" : "记下了"}</h1>
+        <h1>{flow === "not-bought" ? "记下了" : "拿走，开做"}</h1>
         <button onClick={() => window.print()}>打印</button>
       </section>
     </main>
