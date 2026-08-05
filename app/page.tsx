@@ -9,19 +9,44 @@ const ingredients = ["酸木瓜", "小米辣", "香菜"];
 
 const dishes = [
   {
+    name: "傣味舂鸡脚",
+    short: "傣味舂鸡脚",
+    method: "鸡爪煮熟冰镇后去骨；将大蒜、小米辣和香茅舂碎，加入青柠汁、鱼露、生抽、白糖和盐调成酸辣汁。拌入洋葱、黄瓜和胡萝卜，最后加入香菜、薄荷和柠檬片，冷藏腌制。",
+    spices: "青柠檬 · 黄柠檬 · 小米辣 · 大蒜 · 生姜 · 香菜 · 香茅 · 薄荷",
+    label: "酸辣 / 清香 / 舂拌",
+    image: "./assets/dish-dai-chicken-feet-f1eff1.png",
+  },
+  {
     name: "酸木瓜煮鱼",
-    short: "煮鱼",
+    short: "酸木瓜煮鱼",
     method: "鱼块煎香后加入姜片和热水，汤色变白时放入酸木瓜，小火煮十二分钟，最后加入小米辣、香菜和盐。",
+    spices: "酸木瓜 · 小米辣 · 生姜 · 香菜",
+    label: "酸香 / 鲜润 / 慢煮",
+    image: "./assets/dish-sour-papaya-fish.png",
   },
   {
-    name: "凉拌酸木瓜",
-    short: "凉拌",
-    method: "酸木瓜切薄片，用少量盐腌出水分，加入小米辣、香菜和少量糖，拌匀后静置十分钟。",
+    name: "木姜子烤鸡",
+    short: "木姜子烤鸡",
+    method: "鸡肉加入木姜子、大蒜和香茅腌制，烤至表皮焦香；出炉后挤入青柠汁，以香菜和少量小米辣提鲜。",
+    spices: "木姜子 · 香茅 · 大蒜 · 小米辣 · 青柠",
+    label: "柑橘香 / 焦香 / 烘烤",
+    image: "./assets/dish-litsea-roast-chicken.png",
   },
   {
-    name: "酸木瓜炖鸡",
-    short: "炖鸡",
-    method: "鸡块炒香后加水炖煮，鸡肉变软时加入酸木瓜，再煮十五分钟，最后用盐调味并撒上香菜。",
+    name: "青柠拌刺苦瓜",
+    short: "青柠拌刺苦瓜",
+    method: "刺苦瓜切薄片后冰镇，加入青柠汁、少量盐和糖抓拌，再用小米辣、香菜与薄荷补足清香。",
+    spices: "青柠 · 小米辣 · 香菜 · 薄荷",
+    label: "清苦 / 酸亮 / 凉拌",
+    image: "./assets/dish-lime-bitter-gourd.png",
+  },
+  {
+    name: "香茅烤鱼",
+    short: "香茅烤鱼",
+    method: "鲜鱼以香茅、大蒜和小米辣腌制，包入香叶烤熟，食用前挤上青柠汁，让草本香气更明亮。",
+    spices: "香茅 · 青柠 · 小米辣 · 大蒜 · 香叶",
+    label: "草本香 / 鲜辣 / 烘烤",
+    image: "./assets/dish-lemongrass-fish.png",
   },
 ];
 
@@ -93,15 +118,38 @@ function DetectedIngredientCards({ count }: { count: number }) {
 function PoundingAnimation() {
   return (
     <div className="pounding-demo" aria-label="将食材放入木臼并拿起木杵舂击的循环动画">
-      <div className="pounding-frame">
-        <img src="./assets/pound-before-empty.png" alt="空木臼" />
-        <img src="./assets/pound-before-card.png" alt="食材卡放入木臼" />
+      <div className="step-guide">
+        <div className="pounding-mini pounding-mini-one">
+          <div className="step-label"><span>STEP</span><b>1</b></div>
+          <div className="mini-frame">
+            <img src="./assets/step1-empty-transparent.png" alt="空木臼" />
+            <img src="./assets/step1-card-transparent.png" alt="食材卡放入木臼" />
+          </div>
+        </div>
+        <div className="pounding-mini pounding-mini-two">
+          <div className="step-label"><span>STEP</span><b>2</b></div>
+          <div className="mini-frame">
+            <img src="./assets/step2-up-transparent.png" alt="举起木杵" />
+            <img src="./assets/step2-down-transparent.png" alt="木杵向下舂击" />
+          </div>
+        </div>
       </div>
-      <span className="pounding-arrow" aria-hidden="true">➜</span>
-      <div className="pounding-frame">
-        <img src="./assets/pound-after-up.png" alt="举起木杵" />
-        <img src="./assets/pound-after-down.png" alt="木杵向下舂击" />
+      <div className="full-sequence" aria-label="完整舂击动作">
+        <img className="full-frame full-frame-1" src="./assets/step1-empty-transparent.png" alt="" />
+        <img className="full-frame full-frame-2" src="./assets/step1-card-transparent.png" alt="" />
+        <img className="full-frame full-frame-3" src="./assets/step2-up-transparent.png" alt="" />
+        <img className="full-frame full-frame-4" src="./assets/step2-down-transparent.png" alt="" />
       </div>
+    </div>
+  );
+}
+
+function FinalIngredientCards({ count, flow }: { count: number; flow: Flow | null }) {
+  return (
+    <div className={`final-collected-cards ${flow === "bought" ? "final-cards-bought" : "final-cards-curious"}`}>
+      {ingredients.slice(0, count).map((name, index) => (
+        <div className={`final-collected-card final-collected-card-${index + 1}`} key={name}>{name}</div>
+      ))}
     </div>
   );
 }
@@ -153,6 +201,19 @@ export default function Home() {
   const [dishIndex, setDishIndex] = useState(0);
   const [, setPressCount] = useState(0);
   const [discoveredCount, setDiscoveredCount] = useState(0);
+  const [receiptPrinted, setReceiptPrinted] = useState(false);
+
+  useEffect(() => {
+    [
+      "./assets/final-bought-background.png",
+      "./assets/final-curious-background.png",
+      "./assets/recipe-receipt.png",
+      ...dishes.map((dish) => dish.image),
+    ].forEach((src) => {
+      const image = new window.Image();
+      image.src = src;
+    });
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -167,7 +228,10 @@ export default function Home() {
         });
       }
       if (stage === "cards" && event.key === "3") setStage("dish");
-      if (stage === "dish" && event.key === "2") setStage("print");
+      if (stage === "dish" && event.key === "2") {
+        setReceiptPrinted(false);
+        setStage("print");
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -177,6 +241,7 @@ export default function Home() {
     setFlow(nextFlow);
     setPressCount(0);
     setDiscoveredCount(0);
+    setReceiptPrinted(false);
     setStage("cards");
   };
 
@@ -199,6 +264,7 @@ export default function Home() {
           <p>食材入钵，拿起木杵</p>
           <p><strong>舂舂舂</strong>，将食材加入{notBought ? "菜篮" : "铜锅"}</p>
           <small>*舂：用木杵在木臼内上下锤击</small>
+          <em>全部原材料添加完成后停止“舂”</em>
         </section>
         <PoundingAnimation />
       </main>
@@ -209,14 +275,30 @@ export default function Home() {
     const dish = dishes[dishIndex];
     return (
       <main className="page dish-page">
-        <section className="dish-content">
-          <div className="dish-top">
-            <DishPlate dishIndex={dishIndex} />
-            <div className="dish-copy">
-              <h1>{dish.name}</h1>
+        <section className="dish-hero">
+          <div className="dish-photo-wrap">
+            <span className="dish-photo-index">RECIPE / 0{dishIndex + 1}</span>
+            <img key={dish.image} className="dish-photo" src={dish.image} alt={dish.name} />
+          </div>
+          <article className="dish-recipe">
+            <div className="dish-kicker"><i /> YUNNAN SPICE MATCH</div>
+            <h1>{dish.name}</h1>
+            <p className="dish-taste-label">{dish.label}</p>
+            <div className="recipe-block">
+              <h2><span>01</span> 烹饪方法</h2>
               <p>{dish.method}</p>
             </div>
-          </div>
+            <div className="recipe-block recipe-spices">
+              <h2><span>02</span> 需要的香料</h2>
+              <p>{dish.spices}</p>
+            </div>
+          </article>
+        </section>
+        <section className="recommendation-section">
+          <header className="recommendation-head">
+            <div><span>RECOMMENDATION</span><h2>菜品推荐</h2></div>
+            <small>横向滑动查看更多&nbsp; →</small>
+          </header>
           <div className="dish-selector">
             {dishes.map((item, index) => (
               <button
@@ -224,24 +306,36 @@ export default function Home() {
                 className={dishIndex === index ? "selected" : ""}
                 onClick={() => setDishIndex(index)}
               >
-                {item.short}
+                <span>0{index + 1}</span>
+                <strong>{item.short}</strong>
+                <small>{item.label}</small>
               </button>
             ))}
           </div>
         </section>
-        <LargeBasket />
+        <div className="dish-page-dots" aria-hidden="true"><i /><i /><i /><i /></div>
       </main>
     );
   }
 
   return (
-    <main className="page print-page">
-      <section className="print-visual">
-        {flow === "not-bought" ? <HandWithBook /> : <HandWithBag />}
-      </section>
+    <main className={`page print-page ${flow === "not-bought" ? "print-page-curious" : "print-page-bought"}`}>
+      <FinalIngredientCards count={discoveredCount} flow={flow} />
       <section className="print-copy">
-        <h1>{flow === "not-bought" ? "记下了" : "拿走，开做"}</h1>
-        <button onClick={() => window.print()}>打印</button>
+        <h1>{flow === "not-bought" ? "记下，去吃！" : "拎菜，开火！"}</h1>
+        <div className="receipt-machine">
+          <div className="receipt-slot" aria-hidden="true"><i /></div>
+          <button
+            className={`receipt-output ${receiptPrinted ? "open" : ""}`}
+            type="button"
+            aria-expanded={receiptPrinted}
+            aria-label="点击获取食谱小票"
+            onClick={() => setReceiptPrinted(true)}
+          >
+            <img src="./assets/recipe-receipt.png" alt="舂！滇味实验站食谱小票" />
+          </button>
+          <p className={`receipt-guide ${receiptPrinted ? "hidden" : ""}`}>点击小票，获取你的滇味食谱</p>
+        </div>
       </section>
     </main>
   );
