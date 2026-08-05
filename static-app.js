@@ -187,9 +187,9 @@ function renderCards() {
       <p>食材入钵，拿起木杵</p>
       <p><strong>舂舂舂</strong>，将食材加入${notBought ? "菜篮" : "铜锅"}</p>
       <small>*舂：用木杵在木臼内上下锤击</small>
-      <em>全部原材料添加完成后停止“舂”</em>
     </section>
     ${poundingAnimation()}
+    <p class="acquisition-stop-hint">*全部原材料添加完成后停止“舂”</p>
   </main>`;
 }
 
