@@ -149,8 +149,9 @@ export default function Home() {
   if (stage === "start") {
     return (
       <main className="page start-page">
-        <button onClick={() => chooseFlow("not-bought")}>没买</button>
-        <button onClick={() => chooseFlow("bought")}>买了</button>
+        <h1>舂一舂！对这份滇味下手！</h1>
+        <button onClick={() => chooseFlow("not-bought")}>不买菜，但好奇</button>
+        <button onClick={() => chooseFlow("bought")}>拎回家，怎么做</button>
       </main>
     );
   }

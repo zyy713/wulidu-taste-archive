@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "YiDianMingTi";
+  src: url("../assets/yidian-mingti.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -9,7 +17,7 @@ html, body {
 }
 
 body {
-  font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: "YiDianMingTi", serif;
   overflow: hidden;
 }
 
@@ -23,20 +31,41 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .start-page {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 7vw;
-  align-items: center;
-  padding: 12vh 13vw;
+  grid-template-rows: 1fr auto;
+  gap: 3vw;
+  align-items: end;
+  padding: 0 18vw 7vh;
+  background-image: url("../assets/start-page-background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.start-page h1 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 90%;
+  margin: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: clamp(34px, 4.2vw, 66px);
+  font-weight: 400;
+  letter-spacing: .04em;
 }
 
 .start-page button {
-  height: 48vh;
+  grid-row: 2;
+  min-height: 11vh;
   border: 2px solid #111;
-  background: #fff;
+  background: rgba(255, 255, 255, .86);
+  backdrop-filter: blur(5px);
   cursor: pointer;
-  font-size: clamp(38px, 5vw, 80px);
-  font-weight: 700;
+  font-size: clamp(22px, 2.5vw, 38px);
+  font-weight: 400;
 }
 
 .start-page button:hover {
@@ -473,8 +502,16 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 
 @media (max-width: 800px) {
   body { overflow: auto; }
-  .start-page { padding: 15vh 7vw; gap: 4vw; }
-  .start-page button { height: 42vh; }
+  .start-page {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto auto;
+    gap: 2vh;
+    padding: 0 8vw 5vh;
+  }
+  .start-page h1 { top: 16%; font-size: clamp(30px, 8vw, 52px); }
+  .start-page button { min-height: 9vh; }
+  .start-page button:first-of-type { grid-row: 2; }
+  .start-page button:last-of-type { grid-row: 3; }
   .cards-main { grid-template-columns: 1.05fr .95fr; }
   .object-wrap { width: 43vw; }
   .dish-top { grid-template-columns: 1fr; gap: 2vh; }

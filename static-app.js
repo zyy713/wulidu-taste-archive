@@ -85,8 +85,9 @@ function handWithBook() {
 
 function renderStart() {
   app.innerHTML = `<main class="page start-page">
-    <button data-flow="not-bought">没买</button>
-    <button data-flow="bought">买了</button>
+    <h1>舂一舂！对这份滇味下手！</h1>
+    <button data-flow="not-bought">不买菜，但好奇</button>
+    <button data-flow="bought">拎回家，怎么做</button>
   </main>`;
   document.querySelectorAll("[data-flow]").forEach((button) => {
     button.addEventListener("click", () => {
