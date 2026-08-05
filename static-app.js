@@ -55,6 +55,29 @@ function detailCards(count) {
     .join("")}</div>`;
 }
 
+function detectedIngredientCards(count) {
+  const detectedIngredients = ingredients.slice(0, count);
+  const cards = detectedIngredients
+    .map((name, index) => `<div class="detected-card detected-card-${index + 1}">${name}</div>`)
+    .join("");
+  return `<div class="detected-cards detected-cards-container" aria-label="容器内已获取${count}张食材卡">${cards}</div>
+    <div class="detected-cards detected-cards-fence" aria-label="木排上已获取${count}张食材卡">${cards}</div>`;
+}
+
+function poundingAnimation() {
+  return `<div class="pounding-demo" aria-label="将食材放入木臼并拿起木杵舂击的循环动画">
+    <div class="pounding-frame">
+      <img src="./assets/pound-before-empty.png" alt="空木臼" />
+      <img src="./assets/pound-before-card.png" alt="食材卡放入木臼" />
+    </div>
+    <span class="pounding-arrow" aria-hidden="true">➜</span>
+    <div class="pounding-frame">
+      <img src="./assets/pound-after-up.png" alt="举起木杵" />
+      <img src="./assets/pound-after-down.png" alt="木杵向下舂击" />
+    </div>
+  </div>`;
+}
+
 function dishPlate(index) {
   return `<div class="dish-plate dish-${index}" aria-label="${dishes[index].name}">
     <div class="food-lines"><i></i><i></i><i></i><i></i><i></i></div>
@@ -102,15 +125,14 @@ function renderStart() {
 
 function renderCards() {
   const notBought = flow === "not-bought";
-  const discoveredIngredients = ingredients.slice(0, discoveredCount).join("、");
-  app.innerHTML = `<main class="page cards-page">
-    <section class="cards-main">
-      <div class="object-column">${notBought ? basket(discoveredCount) : pot(discoveredCount)}</div>
-      <div class="cards-title">
-        <h1>${notBought ? "开始探索" : "今天怎么吃"}${discoveredIngredients ? `<br />${discoveredIngredients}` : ""}</h1>
-      </div>
+  app.innerHTML = `<main class="page cards-page ${notBought ? "cards-page-curious" : "cards-page-bought"}">
+    ${detectedIngredientCards(discoveredCount)}
+    <section class="acquisition-copy">
+      <p>食材入钵，拿起木杵</p>
+      <p><strong>舂舂舂</strong>，将食材加入${notBought ? "菜篮" : "铜锅"}</p>
+      <small>*舂：用木杵在木臼内上下锤击</small>
     </section>
-    ${detailCards(discoveredCount)}
+    ${poundingAnimation()}
   </main>`;
 }
 

@@ -72,6 +72,40 @@ function DetailCards({ count }: { count: number }) {
   );
 }
 
+function DetectedIngredientCards({ count }: { count: number }) {
+  const detectedIngredients = ingredients.slice(0, count);
+  return (
+    <>
+      <div className="detected-cards detected-cards-container" aria-label={`容器内已获取${count}张食材卡`}>
+        {detectedIngredients.map((name, index) => (
+          <div className={`detected-card detected-card-${index + 1}`} key={name}>{name}</div>
+        ))}
+      </div>
+      <div className="detected-cards detected-cards-fence" aria-label={`木排上已获取${count}张食材卡`}>
+        {detectedIngredients.map((name, index) => (
+          <div className={`detected-card detected-card-${index + 1}`} key={name}>{name}</div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+function PoundingAnimation() {
+  return (
+    <div className="pounding-demo" aria-label="将食材放入木臼并拿起木杵舂击的循环动画">
+      <div className="pounding-frame">
+        <img src="./assets/pound-before-empty.png" alt="空木臼" />
+        <img src="./assets/pound-before-card.png" alt="食材卡放入木臼" />
+      </div>
+      <span className="pounding-arrow" aria-hidden="true">➜</span>
+      <div className="pounding-frame">
+        <img src="./assets/pound-after-up.png" alt="举起木杵" />
+        <img src="./assets/pound-after-down.png" alt="木杵向下舂击" />
+      </div>
+    </div>
+  );
+}
+
 function DishPlate({ dishIndex }: { dishIndex: number }) {
   return (
     <div className={`dish-plate dish-${dishIndex}`} aria-label={dishes[dishIndex].name}>
@@ -158,22 +192,15 @@ export default function Home() {
 
   if (stage === "cards") {
     const notBought = flow === "not-bought";
-    const discoveredIngredients = ingredients.slice(0, discoveredCount).join("、");
     return (
-      <main className="page cards-page">
-        <section className="cards-main">
-          <div className="object-column">
-            {notBought ? <Basket count={discoveredCount} /> : <Pot count={discoveredCount} />}
-          </div>
-          <div className="cards-title">
-            {notBought ? (
-              <h1>开始探索{discoveredIngredients && <><br />{discoveredIngredients}</>}</h1>
-            ) : (
-              <h1>今天怎么吃{discoveredIngredients && <><br />{discoveredIngredients}</>}</h1>
-            )}
-          </div>
+      <main className={`page cards-page ${notBought ? "cards-page-curious" : "cards-page-bought"}`}>
+        <DetectedIngredientCards count={discoveredCount} />
+        <section className="acquisition-copy">
+          <p>食材入钵，拿起木杵</p>
+          <p><strong>舂舂舂</strong>，将食材加入{notBought ? "菜篮" : "铜锅"}</p>
+          <small>*舂：用木杵在木臼内上下锤击</small>
         </section>
-        <DetailCards count={discoveredCount} />
+        <PoundingAnimation />
       </main>
     );
   }

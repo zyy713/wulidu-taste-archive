@@ -74,8 +74,154 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .cards-page {
+  position: relative;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cards-page-bought {
+  background-image: url("../assets/cards-bought-background.png");
+}
+
+.cards-page-curious {
+  background-image: url("../assets/cards-curious-background.png");
+}
+
+.detected-cards {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2vw;
+  pointer-events: none;
+}
+
+.detected-cards-container {
+  top: 12%;
+  left: 7%;
+  width: 40%;
+  height: 48%;
+}
+
+.detected-cards-fence {
+  z-index: 3;
+  left: 14%;
+  right: 14%;
+  bottom: 3%;
+  height: 25%;
+  gap: 3vw;
+}
+
+.detected-card {
+  width: clamp(72px, 7.2vw, 104px);
+  height: clamp(126px, 18vh, 164px);
   display: grid;
-  grid-template-rows: 2fr 1fr;
+  place-items: center;
+  padding: 10px;
+  border: 2px solid #0759b7;
+  background: rgba(255, 255, 255, .9);
+  color: #0a4d9e;
+  font-size: clamp(18px, 1.8vw, 28px);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(78, 47, 28, .12);
+}
+
+.detected-card-1 { transform: rotate(-7deg) translateY(8%); }
+.detected-card-2 { transform: translateY(-8%); }
+.detected-card-3 { transform: rotate(7deg) translateY(8%); }
+
+.detected-cards-fence .detected-card {
+  width: clamp(76px, 7.8vw, 112px);
+  height: clamp(118px, 17vh, 154px);
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 10px 28px rgba(50, 29, 16, .2);
+}
+
+.acquisition-copy {
+  position: absolute;
+  z-index: 2;
+  top: 7.5%;
+  left: 52.7%;
+  width: 42%;
+}
+
+.acquisition-copy p {
+  margin: 0;
+  font-size: clamp(28px, 3vw, 46px);
+  line-height: 1.45;
+  letter-spacing: .02em;
+}
+
+.acquisition-copy strong {
+  color: #0759b7;
+  font-weight: 400;
+}
+
+.acquisition-copy small {
+  display: block;
+  margin-top: 1.3vh;
+  color: #0759b7;
+  font-size: clamp(16px, 1.65vw, 25px);
+}
+
+.pounding-demo {
+  position: absolute;
+  z-index: 2;
+  top: 34%;
+  left: 52.7%;
+  width: 41.7%;
+  height: 30%;
+  display: grid;
+  grid-template-columns: 1fr .32fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  border: 2px solid #ed6508;
+  background: rgba(255, 255, 255, .94);
+}
+
+.pounding-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pounding-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.pounding-frame img:first-child {
+  animation: show-first-frame 1.4s steps(1, end) infinite;
+}
+
+.pounding-frame img:last-child {
+  animation: show-second-frame 1.4s steps(1, end) infinite;
+}
+
+.pounding-arrow {
+  color: #ed6508;
+  font-family: serif;
+  font-size: clamp(46px, 5vw, 76px);
+  line-height: 1;
+  text-align: center;
+}
+
+@keyframes show-first-frame {
+  0%, 49.99% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes show-second-frame {
+  0%, 49.99% { opacity: 0; }
+  50%, 100% { opacity: 1; }
 }
 
 .cards-main {
@@ -512,6 +658,14 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   .start-page button { min-height: 9vh; }
   .start-page button:first-of-type { grid-row: 2; }
   .start-page button:last-of-type { grid-row: 3; }
+  .acquisition-copy { top: 5%; left: 48%; width: 49%; }
+  .acquisition-copy p { font-size: clamp(20px, 4.2vw, 32px); }
+  .acquisition-copy small { font-size: clamp(12px, 2.5vw, 18px); }
+  .pounding-demo { top: 31%; left: 49%; width: 47%; height: 27%; }
+  .detected-cards-container { left: 2%; width: 44%; }
+  .detected-card { min-width: 0; width: 28%; height: 14vh; padding: 5px; }
+  .detected-cards-fence { left: 10%; right: 10%; bottom: 2%; height: 22%; }
+  .detected-cards-fence .detected-card { width: 18%; height: 13vh; }
   .cards-main { grid-template-columns: 1.05fr .95fr; }
   .object-wrap { width: 43vw; }
   .dish-top { grid-template-columns: 1fr; gap: 2vh; }
@@ -519,6 +673,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   .dish-copy h1 { margin-bottom: 2vh; }
   .dish-copy p { font-size: 13px; line-height: 1.6; }
   .hand-scene { transform: scale(.78); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pounding-frame img { animation: none !important; }
+  .pounding-frame img:first-child { opacity: 0; }
+  .pounding-frame img:last-child { opacity: 1; }
 }
 
 @media print {
