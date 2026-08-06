@@ -5,7 +5,14 @@ import { useEffect, useState } from "react";
 type Flow = "not-bought" | "bought";
 type Stage = "start" | "cards" | "dish" | "print";
 
-const ingredients = ["酸木瓜", "小米辣", "香菜"];
+const ingredients = [
+  { name: "皱皮辣", image: "./assets/card-wrinkled-pepper.png" },
+  { name: "刺苦瓜", image: "./assets/card-spiny-bitter-gourd.png" },
+  { name: "二荆条", image: "./assets/card-erjingtiao.png" },
+  { name: "树番茄", image: "./assets/card-tree-tomato.png" },
+  { name: "木姜子", image: "./assets/card-litsea-pungens.png" },
+  { name: "马蹄番茄", image: "./assets/card-horseshoe-tomato.png" },
+];
 
 const dishes = [
   {
@@ -54,8 +61,10 @@ function IngredientCards({ count = ingredients.length }: { count?: number }) {
   const visibleIngredients = ingredients.slice(0, count);
   return (
     <div className="ingredient-cards" aria-label={`${visibleIngredients.length}张食材卡`}>
-      {visibleIngredients.map((name) => (
-        <div className="ingredient-card" key={name}>{name}</div>
+      {visibleIngredients.map((ingredient) => (
+        <div className="ingredient-card" key={ingredient.name}>
+          <img src={ingredient.image} alt={`${ingredient.name}食材卡`} />
+        </div>
       ))}
     </div>
   );
@@ -88,9 +97,9 @@ function Pot({ count }: { count: number }) {
 function DetailCards({ count }: { count: number }) {
   return (
     <div className="detail-row">
-      {ingredients.map((name, index) => (
-        <div className="detail-card" key={name}>
-          {index < count ? `${name}详情` : "待获取"}
+      {ingredients.map((ingredient, index) => (
+        <div className="detail-card" key={ingredient.name}>
+          {index < count ? `${ingredient.name}详情` : "待获取"}
         </div>
       ))}
     </div>
@@ -102,13 +111,17 @@ function DetectedIngredientCards({ count }: { count: number }) {
   return (
     <>
       <div className="detected-cards detected-cards-container" aria-label={`容器内已获取${count}张食材卡`}>
-        {detectedIngredients.map((name, index) => (
-          <div className={`detected-card detected-card-${index + 1}`} key={name}>{name}</div>
+        {detectedIngredients.map((ingredient, index) => (
+          <div className={`detected-card detected-card-${index + 1}`} key={ingredient.name}>
+            <img src={ingredient.image} alt={`${ingredient.name}食材卡`} />
+          </div>
         ))}
       </div>
       <div className="detected-cards detected-cards-fence" aria-label={`木排上已获取${count}张食材卡`}>
-        {detectedIngredients.map((name, index) => (
-          <div className={`detected-card detected-card-${index + 1}`} key={name}>{name}</div>
+        {detectedIngredients.map((ingredient, index) => (
+          <div className={`detected-card detected-card-${index + 1}`} key={ingredient.name}>
+            <img src={ingredient.image} alt={`${ingredient.name}食材卡`} />
+          </div>
         ))}
       </div>
     </>
@@ -147,8 +160,10 @@ function PoundingAnimation() {
 function FinalIngredientCards({ count, flow }: { count: number; flow: Flow | null }) {
   return (
     <div className={`final-collected-cards ${flow === "bought" ? "final-cards-bought" : "final-cards-curious"}`}>
-      {ingredients.slice(0, count).map((name, index) => (
-        <div className={`final-collected-card final-collected-card-${index + 1}`} key={name}>{name}</div>
+      {ingredients.slice(0, count).map((ingredient, index) => (
+        <div className={`final-collected-card final-collected-card-${index + 1}`} key={ingredient.name}>
+          <img src={ingredient.image} alt={`${ingredient.name}食材卡`} />
+        </div>
       ))}
     </div>
   );

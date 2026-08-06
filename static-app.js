@@ -1,4 +1,11 @@
-const ingredients = ["酸木瓜", "小米辣", "香菜"];
+const ingredients = [
+  { name: "皱皮辣", image: "./assets/card-wrinkled-pepper.png" },
+  { name: "刺苦瓜", image: "./assets/card-spiny-bitter-gourd.png" },
+  { name: "二荆条", image: "./assets/card-erjingtiao.png" },
+  { name: "树番茄", image: "./assets/card-tree-tomato.png" },
+  { name: "木姜子", image: "./assets/card-litsea-pungens.png" },
+  { name: "马蹄番茄", image: "./assets/card-horseshoe-tomato.png" },
+];
 
 const dishes = [
   {
@@ -56,6 +63,7 @@ const app = document.getElementById("app");
   "./assets/final-bought-background.png",
   "./assets/final-curious-background.png",
   "./assets/recipe-receipt.png",
+  ...ingredients.map((ingredient) => ingredient.image),
   ...dishes.map((dish) => dish.image),
 ].forEach((src) => {
   const image = new Image();
@@ -65,7 +73,7 @@ const app = document.getElementById("app");
 function ingredientCards(count = ingredients.length) {
   return `<div class="ingredient-cards" aria-label="${count}张食材卡">${ingredients
     .slice(0, count)
-    .map((name) => `<div class="ingredient-card">${name}</div>`)
+    .map((ingredient) => `<div class="ingredient-card"><img src="${ingredient.image}" alt="${ingredient.name}食材卡" /></div>`)
     .join("")}</div>`;
 }
 
@@ -87,14 +95,14 @@ function pot(count) {
 
 function detailCards(count) {
   return `<div class="detail-row">${ingredients
-    .map((name, index) => `<div class="detail-card">${index < count ? `${name}详情` : "待获取"}</div>`)
+    .map((ingredient, index) => `<div class="detail-card">${index < count ? `${ingredient.name}详情` : "待获取"}</div>`)
     .join("")}</div>`;
 }
 
 function detectedIngredientCards(count) {
   const detectedIngredients = ingredients.slice(0, count);
   const cards = detectedIngredients
-    .map((name, index) => `<div class="detected-card detected-card-${index + 1}">${name}</div>`)
+    .map((ingredient, index) => `<div class="detected-card detected-card-${index + 1}"><img src="${ingredient.image}" alt="${ingredient.name}食材卡" /></div>`)
     .join("");
   return `<div class="detected-cards detected-cards-container" aria-label="容器内已获取${count}张食材卡">${cards}</div>
     <div class="detected-cards detected-cards-fence" aria-label="木排上已获取${count}张食材卡">${cards}</div>`;
@@ -129,7 +137,7 @@ function poundingAnimation() {
 
 function finalIngredientCards(count, currentFlow) {
   return `<div class="final-collected-cards ${currentFlow === "bought" ? "final-cards-bought" : "final-cards-curious"}">
-    ${ingredients.slice(0, count).map((name, index) => `<div class="final-collected-card final-collected-card-${index + 1}">${name}</div>`).join("")}
+    ${ingredients.slice(0, count).map((ingredient, index) => `<div class="final-collected-card final-collected-card-${index + 1}"><img src="${ingredient.image}" alt="${ingredient.name}食材卡" /></div>`).join("")}
   </div>`;
 }
 
