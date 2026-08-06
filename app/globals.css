@@ -500,7 +500,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: #682c17;
+  color: #3f4146;
 }
 
 .dish-hero {
@@ -527,9 +527,10 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   top: 1.5vh;
   left: 0;
   padding: .45vh .65vw;
-  border: 1px solid #a44b26;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .75);
+  border: 1px solid #a4a7ad;
+  border-radius: 0;
+  background: rgba(241, 239, 241, .88);
+  color: #5d6067;
   font-family: Arial, sans-serif;
   font-size: clamp(9px, .7vw, 12px);
   font-weight: 700;
@@ -561,7 +562,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   align-items: center;
   gap: .7vw;
   margin-bottom: 1.2vh;
-  color: #0759b7;
+  color: #74777e;
   font-family: Arial, sans-serif;
   font-size: clamp(10px, .72vw, 13px);
   font-weight: 700;
@@ -571,9 +572,9 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 .dish-kicker i {
   width: 9px;
   height: 9px;
-  border-radius: 50%;
-  background: #ed6508;
-  box-shadow: 14px 0 0 rgba(237, 101, 8, .34);
+  border-radius: 0;
+  background: #8f9299;
+  box-shadow: 14px 0 0 rgba(143, 146, 153, .34);
 }
 
 .dish-recipe h1 {
@@ -588,9 +589,10 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   display: inline-block;
   margin: 1.1vh 0 1.8vh;
   padding: .45vh .75vw;
-  border-radius: 999px;
-  background: #edf3ff;
-  color: #0759b7;
+  border: 1px solid #b3b5ba;
+  border-radius: 0;
+  background: rgba(229, 230, 233, .9);
+  color: #575a61;
   font-size: clamp(12px, .95vw, 16px);
 }
 
@@ -598,7 +600,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   position: relative;
   margin-top: 1.2vh;
   padding: 1.1vh 0 0 2.7vw;
-  border-top: 1px solid rgba(104, 44, 23, .34);
+  border-top: 1px solid rgba(102, 105, 112, .42);
 }
 
 .recipe-block h2 {
@@ -610,7 +612,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 .recipe-block h2 span {
   position: absolute;
   left: 0;
-  color: #ed6508;
+  color: #7c7f86;
   font-family: Arial, sans-serif;
   font-size: clamp(11px, .85vw, 14px);
   font-weight: 700;
@@ -623,7 +625,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .recipe-spices p {
-  color: #9a451f;
+  color: #55585f;
   line-height: 1.55;
 }
 
@@ -675,12 +677,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   display: flex;
   align-items: end;
   justify-content: space-between;
-  padding: 0 4vw .9vh;
+  padding: 0 5vw .9vh;
 }
 
 .recommendation-head div > span {
   display: block;
-  color: #0759b7;
+  color: #74777e;
   font-family: Arial, sans-serif;
   font-size: clamp(8px, .64vw, 11px);
   font-weight: 700;
@@ -694,7 +696,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .recommendation-head > small {
-  color: #0759b7;
+  color: #74777e;
   font-size: clamp(11px, .9vw, 15px);
 }
 
@@ -702,12 +704,13 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   display: flex;
   gap: 1.7vw;
   height: 25vh;
-  padding: .5vh 4vw 2vh;
+  padding: .5vh 5vw 2vh;
+  scroll-padding-inline: 5vw;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-  scrollbar-color: #b8643c transparent;
+  scrollbar-color: #9da0a7 transparent;
 }
 
 .dish-selector button {
@@ -719,13 +722,13 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   justify-content: space-between;
   align-items: flex-start;
   padding: 2vh 1.5vw;
-  border: 1.5px solid rgba(104, 44, 23, .68);
-  border-radius: 22px;
-  background: rgba(248, 239, 233, .9);
-  color: #682c17;
+  border: 1.5px solid #a7aab0;
+  border-radius: 0;
+  background: rgba(231, 232, 235, .94);
+  color: #42454b;
   cursor: pointer;
   text-align: left;
-  box-shadow: 0 9px 22px rgba(79, 40, 22, .08);
+  box-shadow: none;
   transition: transform .2s ease, background .2s ease, color .2s ease;
 }
 
@@ -748,9 +751,9 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 .dish-selector button.selected,
 .dish-selector button:hover {
   transform: translateY(-.6vh);
-  border-color: #7c3417;
-  background: #7c3417;
-  color: #fff8f1;
+  border-color: #55585f;
+  background: #55585f;
+  color: #f1eff1;
 }
 
 .dish-page-dots {
@@ -765,12 +768,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 .dish-page-dots i {
   width: 8px;
   height: 8px;
-  border: 1px solid #ed6508;
+  border: 1px solid #9da0a7;
   border-radius: 50%;
 }
 
-.dish-page-dots i:nth-child(2) { background: #ed6508; }
-.dish-page-dots i:nth-child(3) { background: #0759b7; border-color: #0759b7; }
+.dish-page-dots i:nth-child(2) { background: #9da0a7; }
+.dish-page-dots i:nth-child(3) { background: #62656c; border-color: #62656c; }
 
 .large-basket {
   width: 100%;
