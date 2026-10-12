@@ -6,53 +6,73 @@ type Flow = "not-bought" | "bought";
 type Stage = "start" | "cards" | "dish" | "print";
 
 const ingredients = [
-  { name: "皱皮辣", image: "./assets/card-wrinkled-pepper.png" },
-  { name: "刺苦瓜", image: "./assets/card-spiny-bitter-gourd.png" },
-  { name: "二荆条", image: "./assets/card-erjingtiao.png" },
-  { name: "树番茄", image: "./assets/card-tree-tomato.png" },
-  { name: "木姜子", image: "./assets/card-litsea-pungens.png" },
-  { name: "马蹄番茄", image: "./assets/card-horseshoe-tomato.png" },
+  { name: "皱皮辣", nameEn: "Wrinkled Pepper", image: "./assets/card-wrinkled-pepper.png" },
+  { name: "刺苦瓜", nameEn: "Spiny Bitter Gourd", image: "./assets/card-spiny-bitter-gourd.png" },
+  { name: "二荆条", nameEn: "Erjingtiao Chili", image: "./assets/card-erjingtiao.png" },
+  { name: "树番茄", nameEn: "Tree Tomato", image: "./assets/card-tree-tomato.png" },
+  { name: "木姜子", nameEn: "Litsea pungens", image: "./assets/card-litsea-pungens.png" },
+  { name: "马蹄番茄", nameEn: "Heirloom Tomato", image: "./assets/card-horseshoe-tomato.png" },
 ];
 
 const dishes = [
   {
     name: "傣味舂鸡脚",
+    nameEn: "Dai-style Pounded Chicken Feet",
     short: "傣味舂鸡脚",
     method: "鸡爪煮熟冰镇后去骨；将大蒜、小米辣和香茅舂碎，加入青柠汁、鱼露、生抽、白糖和盐调成酸辣汁。拌入洋葱、黄瓜和胡萝卜，最后加入香菜、薄荷和柠檬片，冷藏腌制。",
+    methodEn: "Boil the chicken feet, chill in ice water and debone. Pound garlic, bird’s-eye chili and lemongrass, then mix with lime juice, fish sauce, soy sauce, sugar and salt. Toss with onion, cucumber and carrot; finish with cilantro, mint and lemon slices, then chill to marinate.",
     spices: "青柠檬 · 黄柠檬 · 小米辣 · 大蒜 · 生姜 · 香菜 · 香茅 · 薄荷",
+    spicesEn: "Lime · Lemon · Bird’s-eye chili · Garlic · Ginger · Cilantro · Lemongrass · Mint",
     label: "酸辣 / 清香 / 舂拌",
+    labelEn: "Tangy / Fresh / Pounded",
     image: "./assets/dish-dai-chicken-feet-f1eff1.png",
   },
   {
     name: "酸木瓜煮鱼",
+    nameEn: "Sour Papaya Fish Soup",
     short: "酸木瓜煮鱼",
     method: "鱼块煎香后加入姜片和热水，汤色变白时放入酸木瓜，小火煮十二分钟，最后加入小米辣、香菜和盐。",
+    methodEn: "Sear the fish with ginger and add hot water. When the broth turns milky, add sour papaya and simmer for twelve minutes. Finish with bird’s-eye chili, cilantro and salt.",
     spices: "酸木瓜 · 小米辣 · 生姜 · 香菜",
+    spicesEn: "Sour papaya · Bird’s-eye chili · Ginger · Cilantro",
     label: "酸香 / 鲜润 / 慢煮",
+    labelEn: "Tangy / Savory / Simmered",
     image: "./assets/dish-sour-papaya-fish.png",
   },
   {
     name: "木姜子烤鸡",
+    nameEn: "Litsea Roasted Chicken",
     short: "木姜子烤鸡",
     method: "鸡肉加入木姜子、大蒜和香茅腌制，烤至表皮焦香；出炉后挤入青柠汁，以香菜和少量小米辣提鲜。",
+    methodEn: "Marinate the chicken with litsea, garlic and lemongrass, then roast until crisp and golden. Finish with lime juice, cilantro and a little bird’s-eye chili.",
     spices: "木姜子 · 香茅 · 大蒜 · 小米辣 · 青柠",
+    spicesEn: "Litsea pungens · Lemongrass · Garlic · Bird’s-eye chili · Lime",
     label: "柑橘香 / 焦香 / 烘烤",
+    labelEn: "Citrusy / Charred / Roasted",
     image: "./assets/dish-litsea-roast-chicken.png",
   },
   {
     name: "青柠拌刺苦瓜",
+    nameEn: "Lime-dressed Spiny Bitter Gourd",
     short: "青柠拌刺苦瓜",
     method: "刺苦瓜切薄片后冰镇，加入青柠汁、少量盐和糖抓拌，再用小米辣、香菜与薄荷补足清香。",
+    methodEn: "Thinly slice and chill the spiny bitter gourd. Toss with lime juice, a little salt and sugar, then finish with bird’s-eye chili, cilantro and mint.",
     spices: "青柠 · 小米辣 · 香菜 · 薄荷",
+    spicesEn: "Lime · Bird’s-eye chili · Cilantro · Mint",
     label: "清苦 / 酸亮 / 凉拌",
+    labelEn: "Clean Bitter / Bright / Chilled",
     image: "./assets/dish-lime-bitter-gourd.png",
   },
   {
     name: "香茅烤鱼",
+    nameEn: "Lemongrass Grilled Fish",
     short: "香茅烤鱼",
     method: "鲜鱼以香茅、大蒜和小米辣腌制，包入香叶烤熟，食用前挤上青柠汁，让草本香气更明亮。",
+    methodEn: "Marinate the fish with lemongrass, garlic and bird’s-eye chili. Wrap with aromatic leaves and grill until cooked; finish with lime juice.",
     spices: "香茅 · 青柠 · 小米辣 · 大蒜 · 香叶",
+    spicesEn: "Lemongrass · Lime · Bird’s-eye chili · Garlic · Aromatic leaves",
     label: "草本香 / 鲜辣 / 烘烤",
+    labelEn: "Herbal / Spicy / Grilled",
     image: "./assets/dish-lemongrass-fish.png",
   },
 ];
@@ -99,7 +119,11 @@ function DetailCards({ count }: { count: number }) {
     <div className="detail-row">
       {ingredients.map((ingredient, index) => (
         <div className="detail-card" key={ingredient.name}>
-          {index < count ? `${ingredient.name}详情` : "待获取"}
+          {index < count ? (
+            <><span>{ingredient.name}详情</span><small>{ingredient.nameEn} / DETAILS</small></>
+          ) : (
+            <><span>待获取</span><small>WAITING</small></>
+          )}
         </div>
       ))}
     </div>
@@ -223,6 +247,7 @@ export default function Home() {
       "./assets/final-bought-background.png",
       "./assets/final-curious-background.png",
       "./assets/recipe-receipt.png",
+      ...ingredients.map((ingredient) => ingredient.image),
       ...dishes.map((dish) => dish.image),
     ].forEach((src) => {
       const image = new window.Image();
@@ -263,9 +288,9 @@ export default function Home() {
   if (stage === "start") {
     return (
       <main className="page start-page">
-        <h1>舂一舂！对这份滇味下手！</h1>
-        <button onClick={() => chooseFlow("not-bought")}>不买菜，但好奇</button>
-        <button onClick={() => chooseFlow("bought")}>拎回家，怎么做</button>
+        <h1>舂一舂！对这份滇味下手！<small className="en-copy">POUND IT! TAKE ON THIS YUNNAN FLAVOR.</small></h1>
+        <button onClick={() => chooseFlow("not-bought")}><span>不买菜，但好奇</span><small className="en-copy">JUST CURIOUS, NOT BUYING</small></button>
+        <button onClick={() => chooseFlow("bought")}><span>拎回家，怎么做</span><small className="en-copy">TAKING IT HOME — HOW TO COOK?</small></button>
       </main>
     );
   }
@@ -276,12 +301,12 @@ export default function Home() {
       <main className={`page cards-page ${notBought ? "cards-page-curious" : "cards-page-bought"}`}>
         <DetectedIngredientCards count={discoveredCount} />
         <section className="acquisition-copy">
-          <p>食材入钵，拿起木杵</p>
-          <p><strong>舂舂舂</strong>，将食材加入{notBought ? "菜篮" : "铜锅"}</p>
+          <p>食材入钵，拿起木杵<small className="en-copy">ADD INGREDIENTS. PICK UP THE PESTLE.</small></p>
+          <p><strong>舂舂舂</strong>，将食材加入{notBought ? "菜篮" : "铜锅"}<small className="en-copy">POUND, POUND, POUND — ADD THEM TO THE {notBought ? "BASKET" : "COPPER POT"}.</small></p>
         </section>
         <PoundingAnimation />
-        <p className="acquisition-stop-hint">*全部原材料添加完成后停止“舂”</p>
-        <p className="pounding-definition">*舂：用木杵在木臼内上下锤击</p>
+        <p className="acquisition-stop-hint"><span>*全部原材料添加完成后停止“舂”</span><small className="en-copy">STOP WHEN ALL INGREDIENTS ARE ADDED.</small></p>
+        <p className="pounding-definition"><span>*舂：用木杵在木臼内上下锤击</span><small className="en-copy">POUND UP AND DOWN WITH THE WOODEN PESTLE.</small></p>
       </main>
     );
   }
@@ -297,22 +322,22 @@ export default function Home() {
           </div>
           <article className="dish-recipe">
             <div className="dish-kicker"><i /> YUNNAN SPICE MATCH</div>
-            <h1>{dish.name}</h1>
-            <p className="dish-taste-label">{dish.label}</p>
+            <h1>{dish.name}<small className="en-copy">{dish.nameEn}</small></h1>
+            <p className="dish-taste-label"><span>{dish.label}</span><small>{dish.labelEn}</small></p>
             <div className="recipe-block">
-              <h2><span>01</span> 烹饪方法</h2>
-              <p>{dish.method}</p>
+              <h2><span>01</span> 烹饪方法 <small>METHOD</small></h2>
+              <p>{dish.method}<small className="recipe-en">{dish.methodEn}</small></p>
             </div>
             <div className="recipe-block recipe-spices">
-              <h2><span>02</span> 需要的香料</h2>
-              <p>{dish.spices}</p>
+              <h2><span>02</span> 需要的香料 <small>SPICES</small></h2>
+              <p>{dish.spices}<small className="recipe-en">{dish.spicesEn}</small></p>
             </div>
           </article>
         </section>
         <section className="recommendation-section">
           <header className="recommendation-head">
-            <div><span>RECOMMENDATION</span><h2>菜品推荐</h2></div>
-            <small>横向滑动查看更多&nbsp; →</small>
+            <div><span>RECOMMENDATION</span><h2>菜品推荐 <small>RECOMMENDED DISHES</small></h2></div>
+            <small><span>横向滑动查看更多</span><b>SWIPE TO EXPLORE</b>&nbsp; →</small>
           </header>
           <div className="dish-selector">
             {dishes.map((item, index) => (
@@ -322,8 +347,8 @@ export default function Home() {
                 onClick={() => setDishIndex(index)}
               >
                 <span>0{index + 1}</span>
-                <strong>{item.short}</strong>
-                <small>{item.label}</small>
+                <strong>{item.short}<em>{item.nameEn}</em></strong>
+                <small>{item.label}<em>{item.labelEn}</em></small>
               </button>
             ))}
           </div>
@@ -337,7 +362,7 @@ export default function Home() {
     <main className={`page print-page ${flow === "not-bought" ? "print-page-curious" : "print-page-bought"}`}>
       <FinalIngredientCards count={discoveredCount} flow={flow} />
       <section className="print-copy">
-        <h1>{flow === "not-bought" ? "记下，去吃！" : "拎菜，开火！"}</h1>
+        <h1>{flow === "not-bought" ? "记下，去吃！" : "拎菜，开火！"}<small className="en-copy">{flow === "not-bought" ? "NOTE IT DOWN. GO TASTE IT!" : "TAKE IT HOME. FIRE IT UP!"}</small></h1>
         <div className="receipt-machine">
           <div className="receipt-slot" aria-hidden="true"><i /></div>
           <button
@@ -349,7 +374,7 @@ export default function Home() {
           >
             <img src="./assets/recipe-receipt.png" alt="舂！滇味实验站食谱小票" />
           </button>
-          <p className={`receipt-guide ${receiptPrinted ? "hidden" : ""}`}>点击小票，获取你的滇味食谱</p>
+          <p className={`receipt-guide ${receiptPrinted ? "hidden" : ""}`}><span className="receipt-guide-copy"><span>点击小票，获取你的滇味食谱</span><small className="en-copy">TAP FOR YOUR YUNNAN RECIPE</small></span></p>
         </div>
       </section>
     </main>

@@ -24,6 +24,17 @@ body {
 button { font: inherit; color: inherit; }
 button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 
+.en-copy {
+  display: block;
+  margin-top: .38em;
+  font-family: "YiDianMingTi", serif;
+  font-size: .36em;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: .09em;
+  opacity: .68;
+}
+
 .page {
   width: 100vw;
   height: 100vh;
@@ -57,6 +68,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   letter-spacing: .04em;
 }
 
+.start-page h1 .en-copy {
+  margin-top: .55em;
+  font-size: clamp(12px, 1.15vw, 18px);
+  letter-spacing: .14em;
+}
+
 .start-page button {
   grid-row: 2;
   min-height: 11vh;
@@ -66,6 +83,17 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   cursor: pointer;
   font-size: clamp(22px, 2.5vw, 38px);
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .7vh;
+}
+
+.start-page button .en-copy {
+  margin: 0;
+  font-size: clamp(9px, .85vw, 13px);
+  letter-spacing: .12em;
 }
 
 .start-page button:hover {
@@ -170,6 +198,13 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   letter-spacing: .02em;
 }
 
+.acquisition-copy .en-copy {
+  margin: -.05em 0 .25em;
+  color: #6f7279;
+  font-size: clamp(9px, .78vw, 13px);
+  letter-spacing: .1em;
+}
+
 .acquisition-copy strong {
   color: #e95f06;
   font-weight: 400;
@@ -185,6 +220,14 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   font-size: clamp(14px, 1.25vw, 19px);
   letter-spacing: .035em;
   white-space: nowrap;
+}
+
+.acquisition-stop-hint .en-copy,
+.pounding-definition .en-copy {
+  margin-top: .45em;
+  font-size: clamp(8px, .62vw, 10px);
+  letter-spacing: .08em;
+  opacity: .78;
 }
 
 .acquisition-stop-hint {
@@ -501,6 +544,16 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   place-items: center;
   font-size: clamp(22px, 2.5vw, 40px);
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.detail-card small {
+  font-size: clamp(9px, .7vw, 12px);
+  font-weight: 400;
+  letter-spacing: .1em;
+  opacity: .6;
 }
 
 .dish-page {
@@ -598,6 +651,14 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   letter-spacing: .02em;
 }
 
+.dish-recipe h1 .en-copy {
+  margin-top: .42em;
+  color: #74777e;
+  font-size: clamp(12px, 1vw, 16px);
+  letter-spacing: .08em;
+  opacity: 1;
+}
+
 .dish-taste-label {
   display: inline-block;
   margin: 1.1vh 0 1.8vh;
@@ -607,6 +668,14 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   background: rgba(229, 230, 233, .9);
   color: #575a61;
   font-size: clamp(12px, .95vw, 16px);
+}
+
+.dish-taste-label small {
+  margin-left: .65vw;
+  padding-left: .65vw;
+  border-left: 1px solid rgba(87, 90, 97, .35);
+  font-size: clamp(8px, .62vw, 10px);
+  letter-spacing: .08em;
 }
 
 .recipe-block {
@@ -622,6 +691,13 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   font-weight: 400;
 }
 
+.recipe-block h2 > small {
+  margin-left: .5vw;
+  color: #7c7f86;
+  font-size: clamp(8px, .62vw, 10px);
+  letter-spacing: .11em;
+}
+
 .recipe-block h2 span {
   position: absolute;
   left: 0;
@@ -635,6 +711,16 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   margin: 0;
   font-size: clamp(13px, 1.08vw, 17px);
   line-height: 1.72;
+}
+
+.recipe-en {
+  display: block;
+  margin-top: .45vh;
+  color: #777a81;
+  font-family: "YiDianMingTi", serif;
+  font-size: clamp(8px, .66vw, 11px);
+  line-height: 1.38;
+  letter-spacing: .035em;
 }
 
 .recipe-spices p {
@@ -708,9 +794,25 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   font-weight: 400;
 }
 
+.recommendation-head h2 small {
+  margin-left: .55vw;
+  color: #74777e;
+  font-size: clamp(8px, .62vw, 10px);
+  letter-spacing: .1em;
+}
+
 .recommendation-head > small {
   color: #74777e;
   font-size: clamp(11px, .9vw, 15px);
+}
+
+.recommendation-head > small b {
+  display: block;
+  margin-top: .2vh;
+  font-size: clamp(8px, .62vw, 10px);
+  font-weight: 400;
+  letter-spacing: .1em;
+  opacity: .7;
 }
 
 .dish-selector {
@@ -756,9 +858,28 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   font-weight: 400;
 }
 
+.dish-selector button strong em,
+.dish-selector button > small em {
+  display: block;
+  margin-top: .45vh;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: .05em;
+  opacity: .68;
+}
+
+.dish-selector button strong em {
+  font-size: clamp(8px, .68vw, 11px);
+}
+
 .dish-selector button small {
   opacity: .72;
   font-size: clamp(11px, .85vw, 14px);
+}
+
+.dish-selector button > small em {
+  font-size: clamp(7px, .58vw, 9px);
 }
 
 .dish-selector button.selected,
@@ -924,6 +1045,13 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   white-space: nowrap;
 }
 
+.print-copy h1 .en-copy {
+  margin-top: .55em;
+  text-align: center;
+  font-size: clamp(12px, 1.1vw, 17px);
+  letter-spacing: .11em;
+}
+
 .receipt-machine {
   position: relative;
   width: min(31vw, 430px);
@@ -1017,6 +1145,18 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   letter-spacing: .04em;
   transition: opacity .2s ease, transform .2s ease;
   animation: receipt-guide-pulse 1.8s ease-in-out infinite;
+}
+
+.receipt-guide-copy,
+.receipt-guide-copy > span {
+  display: block;
+}
+
+.receipt-guide .en-copy {
+  margin: .35em 0 0;
+  font-size: clamp(8px, .66vw, 10px);
+  letter-spacing: .09em;
+  opacity: .72;
 }
 
 .receipt-guide::before {
