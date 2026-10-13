@@ -572,12 +572,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 .dish-hero {
   position: relative;
   z-index: 1;
-  width: 79vw;
+  width: 83vw;
   height: 64vh;
   display: grid;
-  grid-template-columns: 41vw 33vw;
-  gap: 3vw;
-  padding: 3.5vh 0 0 4vw;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .95fr);
+  gap: 4vw;
+  padding: 3.5vh 0 0 5vw;
 }
 
 .dish-photo-wrap {
@@ -618,9 +618,8 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .dish-recipe {
-  align-self: center;
-  max-height: 59vh;
-  padding: 2vh 0 0;
+  align-self: start;
+  padding: 1.5vh 0 0;
 }
 
 .dish-kicker {
@@ -772,11 +771,12 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 }
 
 .recommendation-head {
+  width: 83vw;
   height: 8vh;
   display: flex;
   align-items: end;
   justify-content: space-between;
-  padding: 0 5vw .9vh;
+  padding: 0 0 .9vh 5vw;
 }
 
 .recommendation-head div > span {
@@ -825,7 +825,7 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
-  scrollbar-color: #9da0a7 transparent;
+  scrollbar-color: #a9c3a6 transparent;
 }
 
 .dish-selector button {
@@ -837,14 +837,14 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   justify-content: space-between;
   align-items: flex-start;
   padding: 2vh 1.5vw;
-  border: 1.5px solid #a7aab0;
-  border-radius: 0;
-  background: rgba(231, 232, 235, .94);
-  color: #42454b;
+  border: 1.5px solid #c7d9c2;
+  border-radius: 18px;
+  background: #e7f0e3;
+  color: #354a39;
   cursor: pointer;
   text-align: left;
   box-shadow: none;
-  transition: transform .2s ease, background .2s ease, color .2s ease;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
 .dish-selector button > span {
@@ -884,10 +884,10 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
 
 .dish-selector button.selected,
 .dish-selector button:hover {
-  transform: translateY(-.6vh);
-  border-color: #55585f;
-  background: #55585f;
-  color: #f1eff1;
+  border-color: #8cab89;
+  background: #d6e8d1;
+  color: #263d2c;
+  box-shadow: 0 6px 18px rgba(80, 112, 78, .12);
 }
 
 .dish-page-dots {
@@ -1310,6 +1310,28 @@ button:focus-visible { outline: 3px solid #111; outline-offset: 4px; }
   .dish-copy h1 { margin-bottom: 2vh; }
   .dish-copy p { font-size: 13px; line-height: 1.6; }
   .hand-scene { transform: scale(.78); }
+
+  .dish-page { height: auto; min-height: 100vh; overflow: visible; }
+  .dish-hero {
+    width: 100%;
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5vh;
+    padding: 3vh 6vw 0;
+  }
+  .dish-photo-wrap { height: 37vh; }
+  .dish-photo { height: 37vh; }
+  .dish-recipe { padding: 0; }
+  .dish-recipe h1 { font-size: clamp(36px, 8vw, 54px); }
+  .recipe-block p { font-size: clamp(13px, 3vw, 16px); }
+  .recipe-en { font-size: clamp(9px, 2.1vw, 11px); }
+  .recommendation-section { position: relative; bottom: auto; height: auto; margin-top: 3vh; }
+  .recommendation-head { width: 100%; height: auto; padding: 0 6vw 1.5vh; }
+  .recommendation-head h2 small { display: block; margin: .35vh 0 0; }
+  .recommendation-head > small { text-align: right; }
+  .dish-selector { height: 27vh; min-height: 190px; padding: .5vh 6vw 2vh; scroll-padding-inline: 6vw; }
+  .dish-selector button { flex-basis: min(68vw, 280px); padding: 2vh 4vw; }
+  .dish-page-dots { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
